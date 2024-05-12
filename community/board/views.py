@@ -1,5 +1,5 @@
 from .models import Post, Comment
-from .serializers import PostResponseSerializer, CommentRequestSerializer, CommentResponseSerializer, PostDetailSerializer
+from .serializers import PostSerializer, PostResponseSerializer, CommentRequestSerializer, CommentResponseSerializer, PostDetailSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +9,7 @@ from rest_framework import status
 def post_list(request):
     if request.method == 'GET':
         posts = Post.objects.all()
-        serializer = PostResponseSerializer(posts, many=True)
+        serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         serializer = PostResponseSerializer(data=request.data)
